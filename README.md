@@ -1,2 +1,2 @@
-# fluidSimulation
+# FluidSimulation
 Fluid physics simulation
