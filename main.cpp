@@ -3,31 +3,10 @@
 #include <string>
 #include <stdexcept>
 #include <cstdio>
-#include <termios.h>
-#include <unistd.h>
 
 #include "generatorFactory.h"
 
 bool isSave = false;
-
-struct termios orig_termios;
-
-void disableRawMode() {
-    tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
-}
-
-void enableRawMode() {
-    tcgetattr(STDIN_FILENO, &orig_termios);
-    atexit(disableRawMode);
-
-    struct termios raw = orig_termios;
-
-    raw.c_lflag &= ~(ICANON | ECHO | ISIG);
-    raw.c_cc[VMIN] = 0;
-    raw.c_cc[VTIME] = 0;
-
-    tcsetattr(STDIN_FILENO, TCSANOW, &raw);
-}
 
 int main(int argc, char* argv[]) {
     OptionsParser optsParser(argc, argv);
@@ -55,16 +34,8 @@ int main(int argc, char* argv[]) {
 
     engine->load(input);
 
-    enableRawMode();
-
     const int T = 1'000'000;
     for (int i = 0; i < T; ++i) {
-        char c;
-        int nread = read(STDIN_FILENO, &c, 1);
-        if (nread == 1 && c == 4) {
-            isSave = true;
-        }
-
         if (isSave) {
             std::cout << "\nSaving\n";
             engine->save(saveFile);

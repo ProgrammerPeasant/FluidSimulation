@@ -24,7 +24,7 @@
 ## Использование
 Запустите приложение с необходимыми параметрами:
 ```sh
-./FluidFinalVer --p-type="FIXED(32,5)" --v-type="FIXED(32,5)" --v-flow-type="FAST_FIXED(13, 7)" --input=../input.txt --output=../output.txt 
+./FluidFinalVer --p-type="FAST_FIXED(50,16)" --v-type="FAST_FIXED(50,16)" --v-flow-type="FAST_FIXED(50,16)" --input=../input.txt --output=../output.txt  
 ```
 
 Параметры
