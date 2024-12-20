@@ -8,6 +8,8 @@
 
 #include "generatorFactory.h"
 
+bool isSave = false;
+
 struct termios orig_termios;
 
 void disableRawMode() {
@@ -53,14 +55,13 @@ int main(int argc, char* argv[]) {
 
     engine->load(input);
 
-    enableRawMode(); // Включаем неканонический режим
+    enableRawMode();
 
     const int T = 1'000'000;
     for (int i = 0; i < T; ++i) {
-        // Проверяем наличие нажатия клавиши
         char c;
         int nread = read(STDIN_FILENO, &c, 1);
-        if (nread == 1 && c == 4) { // ASCII код 4 соответствует Ctrl+D
+        if (nread == 1 && c == 4) {
             isSave = true;
         }
 
@@ -69,7 +70,7 @@ int main(int argc, char* argv[]) {
             engine->save(saveFile);
             isSave = false;
             std::cout << "Saved in file " << saveFileName << std::endl;
-            getchar(); // Ожидаем нажатия клавиши перед продолжением
+            getchar();
         }
         engine->next(std::cout);
     }
