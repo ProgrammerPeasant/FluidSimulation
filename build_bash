@@ -1,0 +1,6 @@
+#!/bin/bash
+mkdir -p cmake-build
+# shellcheck disable=SC2164
+cd cmake-build
+cmake ..
+cmake --build .

@@ -2,69 +2,78 @@
 #define FLUIDFINALVER_SPECIALARR_H
 
 #include <vector>
+#include <array>
+#include <algorithm>
 #include <cstring>
+#include <stdexcept>
 
-template<typename T, int FixedRows, int FixedCols>
-struct Array {
-    T data_[FixedRows][FixedCols]{};  // Хранение данных в фиксированном массиве
-    int rows_ = FixedRows;             // Количество строк
-    int cols_ = FixedCols;             // Количество столбцов
+namespace FluidPhysics {
 
-    // Метод инициализации для фиксированного массива оставлен пустым,
-    // так как размеры фиксированы и не требуют дополнительной инициализации
-    void initialize(int /*rows*/, int /*cols*/) {}
+    template<typename T, int Width, int Height>
+    struct Array {
+        std::array<std::array<T, Height>, Width> arr{};
+        static constexpr int gridWidth = Width;
+        static constexpr int gridHeight = Height;
 
-    // Оператор доступа к элементам массива остался без изменений
-    T* operator[](int n) {
-        return data_[n];
-    }
+        Array() = default;
 
-    // Оператор присваивания
-    Array& operator=(const Array& other) {
-        if (this != &other) {
-            std::memcpy(data_, other.data_, sizeof(data_));
-            // rows_ и cols_ фиксированы и не требуют копирования
+        void init(int, int) {
+            static_assert(Width != -1 && Height != -1, "init() can only be called on dynamic Arrays");
         }
-        return *this;
-    }
 
-    // Геттеры для размеров массива
-    int getRows() const { return rows_; }
-    int getCols() const { return cols_; }
-};
-
-// Специализация для динамического размера массива
-template<typename T>
-struct Array<T, -1, -1> {
-    std::vector<std::vector<T>> data_{};  // Хранение данных в динамическом двумерном векторе
-    int rows_ = 0;                        // Текущее количество строк
-    int cols_ = 0;                        // Текущее количество столбцов
-
-    // Метод инициализации для динамического массива
-    void initialize(int rows, int cols) {
-        rows_ = rows;
-        cols_ = cols;
-        data_.assign(rows, std::vector<T>(cols, T{}));
-    }
-
-    // Оператор доступа к элементам массива остался без изменений
-    std::vector<T>& operator[](int n) {
-        return data_[n];
-    }
-
-    // Оператор присваивания
-    Array& operator=(const Array& other) {
-        if (this != &other) {
-            data_ = other.data_;
-            rows_ = other.rows_;
-            cols_ = other.cols_;
+        T* operator[](int n) noexcept {
+            if (n < 0 || n >= gridWidth) {
+                throw std::out_of_range("Index out of range");
+            }
+            return arr[n].data();
         }
-        return *this;
-    }
 
-    // Геттеры для размеров массива
-    int getRows() const { return rows_; }
-    int getCols() const { return cols_; }
-};
+        const T* operator[](int n) const noexcept {
+            if (n < 0 || n >= gridWidth) {
+                throw std::out_of_range("Index out of range");
+            }
+            return arr[n].data();
+        }
+
+        Array& operator=(const Array& other) = default;
+
+    };
+
+    template<typename T>
+    struct Array<T, -1, -1> {
+        std::vector<std::vector<T>> arr{};
+        int gridWidth = 0;
+        int gridHeight = 0;
+
+        Array() = default;
+
+        void init(int n, int m) {
+            if (n <= 0 || m <= 0) {
+                throw std::invalid_argument("Dimensions must be positive");
+            }
+            gridWidth = n;
+            gridHeight = m;
+            arr.assign(gridWidth, std::vector<T>(gridHeight, T{}));
+        }
+
+        std::vector<T>& operator[](int n) {
+            if (n < 0 || n >= gridWidth) {
+                throw std::out_of_range("Index out of range");
+            }
+            return arr[n];
+        }
+
+        const std::vector<T>& operator[](int n) const {
+            if (n < 0 || n >= gridWidth) {
+                throw std::out_of_range("Index out of range");
+            }
+            return arr[n];
+        }
+
+        Array& operator=(const Array& other) = default;
+
+    };
+
+}
 
 #endif //FLUIDFINALVER_SPECIALARR_H
