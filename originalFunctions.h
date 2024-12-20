@@ -12,7 +12,7 @@
 #include <optional>
 #include <fstream>
 
-#include "Fluid.h"
+#include "Fixed.h"
 #include "specialArr.h"
 #include "arraysTemps.h"
 #include "random.h"

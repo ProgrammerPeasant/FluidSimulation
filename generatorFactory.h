@@ -5,11 +5,11 @@
 
 namespace FluidPhysics {
     constexpr auto GenerateAllCombo() {
-        constexpr std::pair<int, int> givenSizes[] = {SIZES, {-1, -1}};
+        constexpr std::pair<int, int> givenSizes[] = {DSIZES, {-1, -1}};
         constexpr int sizesCnt = sizeof(givenSizes) / sizeof(std::pair<int, int>);
 
-        constexpr auto givenTypes = std::array{TYPES};
-        constexpr std::array<std::pair<int, int>, sizesCnt> sizes = {std::pair<int, int>(-1, -1), SIZES};
+        constexpr auto givenTypes = std::array{DTYPES};
+        constexpr std::array<std::pair<int, int>, sizesCnt> sizes = {std::pair<int, int>(-1, -1), DSIZES};
         std::array<std::tuple<int, int, int, int, int>,
                 givenTypes.size() * givenTypes.size() * givenTypes.size() * sizesCnt> res = {};
 

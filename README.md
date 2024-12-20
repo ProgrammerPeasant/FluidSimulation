@@ -25,6 +25,7 @@
 Запустите приложение с необходимыми параметрами:
 ```sh
 ./FluidFinalVer --p-type="FIXED(32,5)" --v-type="FIXED(32,5)" --v-flow-type="FAST_FIXED(13, 7)" --input=../input.txt --output=../output.txt 
+```
 
 Параметры
 --input путь к входному файлу
@@ -32,3 +33,5 @@
 --p-type
 --v-type
 --v-flow-type
+
+DTYPE, DSIZE редактируются в файле CMakeLists.txt в самом начале файла

@@ -6,25 +6,19 @@
 
 #include "originalFunctions.h"
 
-//#define TYPES FLOAT,DOUBLE,FIXED(32, 9),FAST_FIXED(40, 5),FAST_FIXED(50, 16)
-
 #define FLOAT 1
 #define DOUBLE 2
 #define FIXED(n, k) ((n) * 1000 + (k))
 #define FAST_FIXED(n, k) ((n) * 100000 + (k))
-#define PAIR(n, k) std::pair<int, int>((n), (k))
 #define S(n, m) std::pair<int, int>((n), (m))
-//#define SIZES S(35, 286),S(36, 84)
 
-
-#ifndef TYPES
-#define TYPES FLOAT, DOUBLE, FIXED(32, 9), FAST_FIXED(40, 5), FAST_FIXED(50, 16)
+#ifndef DTYPES
+#define DTYPES FLOAT, DOUBLE, FIXED(32, 9), FAST_FIXED(40, 5), FAST_FIXED(50, 16)
 #endif
 
-#ifndef SIZES
-#define SIZES S(-1, -1)
+#ifndef DSIZES
+#define DSIZES S(-1, -1)
 #endif
-
 
 enum class EType {
     FIXED,
