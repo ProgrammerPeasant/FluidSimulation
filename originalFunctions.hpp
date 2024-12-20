@@ -12,10 +12,10 @@
 #include <optional>
 #include <fstream>
 
-#include "Fixed.h"
-#include "specialArr.h"
-#include "arraysTemps.h"
-#include "random.h"
+#include "Fixed.hpp"
+#include "specialArr.hpp"
+#include "arraysTemps.hpp"
+#include "random.hpp"
 
 using namespace std;
 

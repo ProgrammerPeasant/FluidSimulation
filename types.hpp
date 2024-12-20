@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <charconv>
 
-#include "originalFunctions.h"
+#include "originalFunctions.hpp"
 
 #define FLOAT 1
 #define DOUBLE 2

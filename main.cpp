@@ -6,7 +6,7 @@
 #include <cstdio>
 #include <filesystem>
 
-#include "generatorFactory.h"
+#include "generatorFactory.hpp"
 
 namespace fs = std::filesystem;
 

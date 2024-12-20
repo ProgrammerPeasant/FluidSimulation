@@ -9,7 +9,7 @@
 #include <random>
 #include <tuple>
 #include <algorithm>
-#include "specialArr.h"
+#include "specialArr.hpp"
 
 namespace FluidPhysics {
     template<int gridWidth, bool isFast>

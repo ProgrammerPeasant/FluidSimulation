@@ -17,14 +17,14 @@ set(SOURCES
 )
 
 set(HEADERS
-        Fixed.h
-        specialArr.h
-        originalFunctions.h
-        typeHolder.h
-        random.h
-        arraysTemps.h
-        types.h
-        generatorFactory.h
+        Fixed.hpp
+        specialArr.hpp
+        originalFunctions.hpp
+        typeHolder.hpp
+        random.hpp
+        arraysTemps.hpp
+        types.hpp
+        generatorFactory.hpp
 )
 
 add_executable(FluidFinalVer ${SOURCES} ${HEADERS})

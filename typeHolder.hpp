@@ -8,8 +8,8 @@
 #include <memory>
 #include <unordered_map>
 
-#include "originalFunctions.h"
-#include "types.h"
+#include "originalFunctions.hpp"
+#include "types.hpp"
 
 namespace FluidPhysics {
     template<size_t n>

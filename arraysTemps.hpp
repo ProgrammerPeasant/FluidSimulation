@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <cassert>
 
-#include "specialArr.h"
+#include "specialArr.hpp"
 
 namespace FluidPhysics {
 
